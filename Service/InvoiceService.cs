@@ -6,14 +6,23 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Service
 {
     public class InvoiceService
     {
 
-        #region Comentario
-        //Aqui va todo la logica de las invoice eso quiere decir que vamos a encapsular los metodos
+        #region Descripción de la clase Invoice Service
+        /*
+         * Aqui esta definida la logica de la entidad invoice con los metodos publicos y encapsulados
+         * Los metodos presentes en esta clase hace la funcion de un CRUD
+         * INSERT
+         * UPDATE
+         * DELETE
+         * GETALL
+         * GETID
+         * **/
         #endregion
 
         #region Metodos Publicos
@@ -86,36 +95,64 @@ namespace Service
         public void Create ( Invoice model)
         {
             PrepareOrder(model);
-            using (var context = new SqlConnection(Parameters.ConnectionString))
+            using (var tranx = new TransactionScope())
             {
-                context.Open();
-                //Header
-                AddHeader(model,context);
-                //Details
-                AddDetail(model,context);
+                using (var context = new SqlConnection(Parameters.ConnectionString))
+                {
+                    context.Open();
+                    //Header
+                    AddHeader(model, context);
+                    //Details
+                    AddDetail(model, context);
+                }
+                tranx.Complete();
             }
+          
         }
         //Actualizamos un invoice con su detalle
         public void Update(Invoice model)
         {
             PrepareOrder(model);
-            using (var context = new SqlConnection(Parameters.ConnectionString))
+            using (var tranx = new TransactionScope())
             {
+                using (var context = new SqlConnection(Parameters.ConnectionString))
+                {
+                    context.Open();
+                    //Header
+                    UpdateHeader(model, context);
+                    //Remove 
+                    RemoveDetail(model.Id, context);
+                    //Details
+                    AddDetail(model, context);
+                }
+                tranx.Complete();
+            }
+                
+        }
+        //Elminar un invoice con su detalle
+        public void Delete(int id)
+        {
+            using (var context  = new SqlConnection(Parameters.ConnectionString))
+            {
+                //Abrimos la conexion
                 context.Open();
-                //Header
-                UpdateHeader(model, context);
-                //Remove 
-                RemoveDetail(model.Id, context);
-                //Details
-                AddDetail(model, context);
+                //Primero eliminar el detalle de la factura
+                RemoveDetail(id, context);
+                //Segundo eliminar la factura luego de que el detalla este elimnado 
+                DeleteHeader(id, context);
             }
         }
+
+
+        #endregion
+
+        #region Metodos Encapsulados
         //Metodo encapsulado para crear la cabecera del metodo create
         private void AddHeader(Invoice model, SqlConnection context)
         {
             var query = "insert into invoices(clientId,Iva,SubTotal,Total) output INSERTED.ID values(@clientId,@iva, @subTotal,@total)";
             var command = new SqlCommand(query, context);
-            command.Parameters.AddWithValue("@iva",model.Iva);
+            command.Parameters.AddWithValue("@iva", model.Iva);
             command.Parameters.AddWithValue("@clientId", model.ClientId);
             command.Parameters.AddWithValue("@subTotal", model.SubTotal);
             command.Parameters.AddWithValue("@total", model.Total);
@@ -136,12 +173,14 @@ namespace Service
             command.ExecuteNonQuery();
 
         }
-
-
-
-        #endregion
-
-        #region Metodos Encapsulados
+        //Metodo encapsulado para eliminar la cabecera del metodo delete
+        private void DeleteHeader(int invoiceId,SqlConnection context)
+        {
+            var query = "delete from invoices where id = @id";
+            var command = new SqlCommand(query,context);
+            command.Parameters.AddWithValue("@id",invoiceId);
+            command.ExecuteNonQuery();
+        }
         //Insertamos el detalle a la cabecera
         private void AddDetail(Invoice invoice, SqlConnection context)
         {
