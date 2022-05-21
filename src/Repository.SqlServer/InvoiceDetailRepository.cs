@@ -25,7 +25,7 @@ namespace Repository.SqlServer
                 var command = CreateCommand(query);
 
                 command.Parameters.AddWithValue("@invoiceId", invoiceId);
-                command.Parameters.AddWithValue("@productId", detail.ProductId);
+                command.Parameters.AddWithValue("@productId", detail.ProductoId);
                 command.Parameters.AddWithValue("@quantity", detail.Quantity);
                 command.Parameters.AddWithValue("@price", detail.Price);
                 command.Parameters.AddWithValue("@iva", detail.Iva);

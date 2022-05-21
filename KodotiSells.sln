@@ -23,13 +23,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05. Repository", "05. Repos
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. UnitOfWork", "04. UnitOfWork", "{46E48890-2D0F-41D1-9E96-FE0EE818E41F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitOfWork.Interfaces", "src\UnitOfWork.Interfaces\UnitOfWork.Interfaces.csproj", "{BB1A0314-4D7B-432E-BD9E-3FFF9881B004}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitOfWork.Interfaces", "src\UnitOfWork.Interfaces\UnitOfWork.Interfaces.csproj", "{BB1A0314-4D7B-432E-BD9E-3FFF9881B004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitOfWork.SqlServer", "src\UnitOfWork.SqlServer\UnitOfWork.SqlServer.csproj", "{65B100CB-FF06-45C5-BA27-4CEAA7596A47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitOfWork.SqlServer", "src\UnitOfWork.SqlServer\UnitOfWork.SqlServer.csproj", "{65B100CB-FF06-45C5-BA27-4CEAA7596A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Interfaces", "src\Repository.Interfaces\Repository.Interfaces.csproj", "{1C26CD8F-B95C-4F8C-A7D8-82E003C90D97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Interfaces", "src\Repository.Interfaces\Repository.Interfaces.csproj", "{1C26CD8F-B95C-4F8C-A7D8-82E003C90D97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.SqlServer", "src\Repository.SqlServer\Repository.SqlServer.csproj", "{96FF620C-74A6-4638-9121-9892882C1D3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.SqlServer", "src\Repository.SqlServer\Repository.SqlServer.csproj", "{96FF620C-74A6-4638-9121-9892882C1D3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetClient", "src\AspNetClient\AspNetClient.csproj", "{7B454FA6-F068-4707-B580-69AFB4725E6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{96FF620C-74A6-4638-9121-9892882C1D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96FF620C-74A6-4638-9121-9892882C1D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96FF620C-74A6-4638-9121-9892882C1D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B454FA6-F068-4707-B580-69AFB4725E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B454FA6-F068-4707-B580-69AFB4725E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B454FA6-F068-4707-B580-69AFB4725E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B454FA6-F068-4707-B580-69AFB4725E6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{65B100CB-FF06-45C5-BA27-4CEAA7596A47} = {46E48890-2D0F-41D1-9E96-FE0EE818E41F}
 		{1C26CD8F-B95C-4F8C-A7D8-82E003C90D97} = {0BE2B278-9440-4C3E-818F-67C6C8B8756A}
 		{96FF620C-74A6-4638-9121-9892882C1D3D} = {0BE2B278-9440-4C3E-818F-67C6C8B8756A}
+		{7B454FA6-F068-4707-B580-69AFB4725E6B} = {F7CC66A7-1D0C-48E6-B4FE-B72C1F41F221}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1A03955C-BE0E-4078-A0B0-F46223A20A61}

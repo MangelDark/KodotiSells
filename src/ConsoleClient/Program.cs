@@ -2,6 +2,7 @@
 using Service;
 using System;
 using System.Collections.Generic;
+using UnitOfWork.SqlServer;
 
 namespace ConsoleClient
 {
@@ -10,8 +11,12 @@ namespace ConsoleClient
         static void Main(string[] args)
         {
 
+            var unit = new UnitOfWorkSqlServer();
+            var invoiceService = new InvoiceService(unit);
+
+            invoiceService.GetAll();
             Console.WriteLine("Hello World!");
-            var orderService  =  new InvoiceService();
+           
             //var result = orderService.Get(1);
             //var invoice = new Invoice
             //{
@@ -36,7 +41,6 @@ namespace ConsoleClient
             //};
 
             //orderService.Create(invoice);
-            orderService.Delete(16);
             Console.ReadLine();
           
 
